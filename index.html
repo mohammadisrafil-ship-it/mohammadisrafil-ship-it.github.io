@@ -141,14 +141,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;op
 .desk-title p{margin-top:14px;color:var(--muted)}
 .folders{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 12px;list-style:none}
 .folder{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;padding:6px 0;touch-action:manipulation;-webkit-user-select:none;user-select:none}
-.f-icon{--iw:min(132px,100%);position:relative;width:var(--iw);aspect-ratio:1.32;margin-top:calc(var(--iw) * .22);perspective:600px}
+.f-icon{--iw:min(132px,100%);position:relative;width:var(--iw);aspect-ratio:1.1;margin-top:calc(var(--iw) * .08);perspective:600px}
 .f-back{position:absolute;inset:9% 0 0;border-radius:7px;background:var(--fd)}
 .f-back::before{content:"";position:absolute;left:0;top:-11%;width:38%;height:14%;border-radius:7px 7px 0 0;background:var(--fd)}
 .f-sheets{position:absolute;inset:0}
-.f-sheets img{position:absolute;left:7%;top:-26%;width:86%;object-position:50% 0;aspect-ratio:4/3;object-fit:cover;border:2px solid #fff;border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:transform .5s var(--ease)}
-.f-sheets img:first-child{transform:rotate(-7deg) translate(-6%,8%)}
+.f-sheets img{position:absolute;left:7%;top:6%;width:86%;object-position:50% 0;aspect-ratio:4/3;object-fit:cover;border:2px solid #fff;border-radius:3px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:transform .5s var(--ease)}
+/* the front sheet is a full-page screenshot: hero shows at rest, hover scrolls it top to bottom */
+.f-sheets img.pg{transition:transform .5s var(--ease),object-position .9s var(--ease)}
+.f-sheets img:first-child{transform:rotate(-6deg) translate(-5%,3%)}
 .f-sheets img:last-child{transform:none;box-shadow:0 4px 12px rgba(0,0,0,.22)}
-.f-front{position:absolute;left:0;right:0;bottom:0;height:48%;border-radius:7px;background:linear-gradient(180deg,var(--fl),var(--fc));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 14px -8px rgba(0,0,0,.35);transform-origin:50% 100%;transition:transform .5s var(--ease)}
+.f-front{position:absolute;left:0;right:0;bottom:0;height:24%;border-radius:7px;background:linear-gradient(180deg,var(--fl),var(--fc));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 14px -8px rgba(0,0,0,.35);transform-origin:50% 100%;transition:transform .5s var(--ease)}
 .f-front::after{content:attr(data-n);position:absolute;right:9px;bottom:7px;font-family:var(--mono);font-size:10px;color:var(--ft)}
 .f-label{padding:3px 8px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink);transition:background .25s,color .25s}
 .f-tags{margin-top:-8px;color:var(--muted);white-space:nowrap}
@@ -369,9 +371,10 @@ body.cs-open{overflow:hidden}
   .cta-cell:hover{background:var(--red);color:var(--paper)}
   .logo:hover::before{transform:none}
   .logo:hover img{opacity:1}
-  .folder:hover .f-sheets img:first-child{transform:rotate(-10deg) translate(-10%,0)}
-  .folder:hover .f-sheets img:last-child{transform:translateY(-10%) scale(1.04)}
-  .folder:hover .f-front{transform:rotateX(-18deg)}
+  .folder:hover .f-sheets img:first-child{transform:rotate(-9deg) translate(-9%,1%)}
+  .folder:hover .f-sheets img:last-child{transform:translateY(-5%) scale(1.06)}
+  .folder.play .f-sheets img.pg{object-position:50% 100%;transition:transform .5s var(--ease),object-position var(--dur,6s) linear .3s}
+  .folder:hover .f-front{transform:rotateX(-30deg)}
   .folder:hover .f-label{background:var(--ink);color:var(--paper)}
   .cs-arrows button:hover{background:var(--ink);color:var(--paper)}
   .cs-next .nx:hover{background:var(--ink);color:var(--paper)}
@@ -454,36 +457,36 @@ body.cs-open{overflow:hidden}
     <div class="desk-title"><h2 class="serif split-lines">Selected<br>work</h2><p class="mono">(08) — Eight pages, one job: convert. Open a folder to see how.</p></div>
     <ul class="folders">
     <li><button type="button" class="folder fr" style="--r:2deg" aria-label="Open Thurston Neale case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/tn-cover.jpg" alt="" loading="lazy"><img src="assets/images/thumb-thurstonneale.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="01"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/tn-cover.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-thurstonneale.jpg" data-full="assets/images/page-thurstonneale.jpg" style="--dur:5.1s" alt="" loading="lazy"></span><span class="f-front" data-n="01"></span></span>
       <span class="f-label">Thurston Neale</span>
     </button></li>
     <li><button type="button" class="folder fk" style="--r:-3deg" aria-label="Open Social Hotspot case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/sh-cover.jpg" alt="" loading="lazy"><img src="assets/images/thumb-social-hotspot.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="02"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/sh-cover.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-social-hotspot.jpg" data-full="assets/images/page-social-hotspot.jpg" style="--dur:6.7s" alt="" loading="lazy"></span><span class="f-front" data-n="02"></span></span>
       <span class="f-label">Social Hotspot</span>
     </button></li>
     
     <li><button type="button" class="folder fb" style="--r:-4deg" aria-label="Open Duducto case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/QaLHUnsQRR8YE0YMpKvwpADAM.jpg" alt="" loading="lazy"><img src="assets/images/thumb-deducto.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="03"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/QaLHUnsQRR8YE0YMpKvwpADAM.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-deducto.jpg" data-full="assets/images/page-deducto.jpg" style="--dur:7.2s" alt="" loading="lazy"></span><span class="f-front" data-n="03"></span></span>
       <span class="f-label">Duducto</span>
     </button></li>
     <li><button type="button" class="folder fp" style="--r:3deg" aria-label="Open SYSUSA case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/qpk9SbiYHL0Rfw2W6nTaN9MK20.jpg" alt="" loading="lazy"><img src="assets/images/thumb-sysusa.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="04"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/qpk9SbiYHL0Rfw2W6nTaN9MK20.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-sysusa.jpg" data-full="assets/images/page-sysusa.jpg" style="--dur:6.8s" alt="" loading="lazy"></span><span class="f-front" data-n="04"></span></span>
       <span class="f-label">SYSUSA</span>
     </button></li>
     <li><button type="button" class="folder fo" style="--r:2deg" aria-label="Open eFacade-Go case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/tsTl1NuRt28rw42SQtrn9gqchQ.jpg" alt="" loading="lazy"><img src="assets/images/thumb-efacade-go.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="05"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/tsTl1NuRt28rw42SQtrn9gqchQ.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-efacade-go.jpg" data-full="assets/images/page-efacade-go.jpg" style="--dur:11s" alt="" loading="lazy"></span><span class="f-front" data-n="05"></span></span>
       <span class="f-label">eFacade-Go</span>
     </button></li>
     <li><button type="button" class="folder fs" style="--r:3deg" aria-label="Open XPLN case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/Qvn4slgrbbtdUYz4nwBjrSdSYWc.jpg" alt="" loading="lazy"><img src="assets/images/thumb-xpln.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="06"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/Qvn4slgrbbtdUYz4nwBjrSdSYWc.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-xpln.jpg" data-full="assets/images/page-xpln.jpg" style="--dur:2s" alt="" loading="lazy"></span><span class="f-front" data-n="06"></span></span>
       <span class="f-label">XPLN</span>
     </button></li>
     <li><button type="button" class="folder fg" style="--r:-3deg" aria-label="Open Wagepoint case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/1chdoXUTsO3wNzU4ltDUBdvzmqs.jpg" alt="" loading="lazy"><img src="assets/images/thumb-wagepoint.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="07"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/1chdoXUTsO3wNzU4ltDUBdvzmqs.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-wagepoint.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="07"></span></span>
       <span class="f-label">Wagepoint</span>
     </button></li>
     <li><button type="button" class="folder fy" style="--r:-2deg" aria-label="Open TPH - ACA case study">
-      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/GraJT2J3JYtP8AEdOzLKcqWD1CI.jpg" alt="" loading="lazy"><img src="assets/images/thumb-trueplanhealth.jpg" alt="" loading="lazy"></span><span class="f-front" data-n="08"></span></span>
+      <span class="f-icon" aria-hidden="true"><span class="f-back"></span><span class="f-sheets"><img src="assets/images/GraJT2J3JYtP8AEdOzLKcqWD1CI.jpg" alt="" loading="lazy"><img class="pg" src="assets/images/thumb-trueplanhealth.jpg" data-full="assets/images/page-trueplanhealth.jpg" style="--dur:4.8s" alt="" loading="lazy"></span><span class="f-front" data-n="08"></span></span>
       <span class="f-label">TPH - ACA</span>
     </button></li>
     </ul>
@@ -929,6 +932,20 @@ body.cs-open{overflow:hidden}
 
     // folders: click opens the case study
     folders.forEach((f, i) => {
+      const pg = f.querySelector('img.pg[data-full]');
+      if (pg) {
+        let ready = false, over = false;
+        const play = () => { if (ready && over) requestAnimationFrame(() => f.classList.add('play')); };
+        const enter = () => {
+          over = true;
+          if (!pg.dataset.loaded) { pg.dataset.loaded = 1; const im = new Image(); im.onload = () => { pg.src = im.src; ready = true; play(); }; im.src = pg.dataset.full; }
+          else play();
+        };
+        const leave = () => { over = false; f.classList.remove('play'); };
+        f.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') enter(); });
+        f.addEventListener('pointerleave', leave);
+        f.addEventListener('focus', enter); f.addEventListener('blur', leave);
+      }
       f.addEventListener('click', () => {
         folders.forEach(o => o.classList.toggle('sel', o === f));
         open(i, f);
