@@ -154,6 +154,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;op
 .f-front::after{content:attr(data-n);position:absolute;right:9px;bottom:7px;font-family:var(--mono);font-size:10px;color:var(--ft)}
 .f-label{padding:3px 8px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink);transition:background .25s,color .25s}
 .f-tags{margin-top:-8px;color:var(--muted);white-space:nowrap}
+.f-res{margin-top:-6px;font-size:11px;letter-spacing:.02em;color:var(--red);white-space:nowrap}
 .folder:focus-visible{outline:none}
 .folder:focus-visible .f-label,.folder.sel .f-label{background:var(--ink);color:var(--paper)}
 /* folder colours: real file-folder tones */
@@ -933,6 +934,12 @@ body.cs-open{overflow:hidden}
         if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
         else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
       }
+    });
+
+    // folders: one short headline result under each name (first filled RESULTS entry)
+    folders.forEach((f, i) => {
+      const r = (RESULTS[CASES[i] && CASES[i].slug] || []).find(x => x.value);
+      if (r) f.insertAdjacentHTML('beforeend', `<span class="f-res mono">${esc(r.value)} ${esc(r.label.toLowerCase())}</span>`);
     });
 
     // folders: click opens the case study
